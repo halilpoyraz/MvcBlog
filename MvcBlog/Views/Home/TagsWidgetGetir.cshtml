@@ -1,0 +1,88 @@
+﻿@{
+    Layout = null;
+}
+@model IEnumerable<MvcBlog.Models.Etiket>
+
+
+<div class="widget blog-tags">
+    <h5>Etiketler</h5>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li><a href="/Etiket/Index/@item.Id" class="btn btn-default">@item.Adi (@item.Makales.Count)</a></li>
+
+        }
+    </ul>
+</div>
+<div class="widget italic-text text-center">
+    <h5>Linkedin</h5>
+    <div class="content text-center">
+        <img style="width: 75px; height: 75px; border-radius: 4px;" src="~/Content/img/hll.jpg" />
+        <br />
+        Ürün Geliştirme ve Proje Uzman Yardımcısı
+        <br />
+        İstanbul, Türkiye
+        <br />
+        Lisans | Marmara Üniversitesi | Bilgi ve Belge Yönetimi
+        <br />
+        Master | Beykent üniversitesi | Yönetim Bilişim Sistemleri
+        <br />
+        Wissen Akademie | Microsoft Yazılım ve Veritabanı
+    </div>
+    <a href="https://www.linkedin.com/in/halil-ibrahim-poyraz-35664b67" target="_blank" class="btn btn-primary"><b>Follow on Linkedin</b></a><br />
+</div>
+@*<div class="widget regular-text text-center">
+    <h5>"İletişime Geç"</h5>
+    <div class="content">
+        Web sayfası, E-ticaret Sitesi ya da Kişisel Blog sayfasına ihtiyacın varsa
+        <br />
+        "İletişime Geç"
+        <br />
+        EBYS (Elektronik Belge Yönetim Sistemi) Nedir, Ne İşe Yarar ? Standart Dosya Planı Nedir, Ne İşe Yarar ? Fizeksel Arşiv Nasıl Tutulur ? TS:13298 (Elektronik Belge Yönetim Standardı) Nedir ? Yazılım Firmaları Açısından Önemi Nedir ? Bilmiyorsan,
+        <br />
+        "İletişime Geç"
+    </div>
+</div>*@
+<div class="widget italic-text text-center">
+    <h5>EBYS Community Türkiye</h5>
+    <div class="content text-center">
+        <img style="width: 75px; height: 75px; border-radius: 4px;" src="~/Content/content/ebys.png" /> <br />
+        EBYS Community Türkiye
+        <br />
+        EBYS | Elektronik Belge Yönetim Sistemi <br />
+        ERMS | Electronic Records Management System <br />
+        Türkiyede EBYS alanında çalışan yada ilgi duyanların Sosyal Medyada buluştuğu bir topluluk.. <br />
+    </div>
+    <a href="https://www.facebook.com/groups/ebyscommunity/" target="_blank" class="btn btn-primary"><b>Gruba Katıl</b></a><br />
+</div>
+
+
+<div class="widget portfolio text-center">
+    <h5>Portföy</h5>
+    <div class="content">
+        <div class="portfolio-slider">
+            <ul class="slides">
+                <li>
+                    <figure>
+                        <img src="~/Content/content/portfolio01.jpg" />
+                    </figure>
+                </li>
+                <li>
+                    <figure>
+                        <img src="~/Content/content/portfolio01.jpg" />
+                    </figure>
+                </li>
+                <li>
+                    <figure>
+                        <img src="~/Content/content/portfolio01.jpg" />
+                    </figure>
+                </li>
+                <li>
+                    <figure>
+                        <img src="~/Content/content/portfolio01.jpg" />
+                    </figure>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "MakaleYaz";
+}
+
+<h2>Yeni Makale Oluştur</h2>
+<div class="tabs-top">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#top-tab1" data-toggle="tab">Metin</a></li>
+        <li><a href="#top-tab2" data-toggle="tab">Resim Galerisi</a></li>
+
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="top-tab1">
+            @using (Html.BeginForm("MakaleYaz","Yonetim",FormMethod.Post,new{ enctype="multipart/form-data" }))
+            {
+                <table>
+                    <tr>
+                        <td>Başlık</td>
+                        <td>
+                            <input class="form-control" type="text" name="Baslik" value="" placeholder="Başlık giriniz" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Kategori</td>
+                        <td>
+                            <select class="form-control" name="KategriID">
+                                @foreach (var kategori in ViewBag.Kategoriler)
+                                {
+                                    <option value="@kategori.Id">
+                                         @kategori.Adi
+                                        
+                                    </option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Etiketler</td>
+                        <td>
+                            <input class="form-control" type="text" name="etiketler" placeholder="Etiket giriniz" value="" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Resim</td>
+                        <td>
+                            <input class="form-control" type="file" name="Resim" value=" " />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>İçerik</td>
+                        <td>
+                            @*@Html.TextArea("Icerik")*@
+                           
+                            <textarea class="form-control" name="Icerik" placeholder="Makale içeriğini giriniz" cols="50" rows="20">
+                                
+                            </textarea>
+                            
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input class="form-control" type="submit" name="btnEkle" value="Kaydet" />
+                        </td>
+                    </tr>
+                </table>
+            }
+        </div>
+        <div class="tab-pane" id="top-tab2">
+            Galeri
+        </div>
+
+    </div>
+</div>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/ckfinder/ckfinder.js"></script>
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+     
+@*<script type="text/javascript">
+    var editor = CKEDITOR.instances['Icerik'];
+    if (editor) { editor.destroy(true); }
+    CKEDITOR.replace('Icerik', {
+        enterMode: CKEDITOR.ENTER_BR,
+    });
+    CKFinder.setupCKEditor(null, '@Url.Content("~/ckfinder/")');
+</script>*@
+    

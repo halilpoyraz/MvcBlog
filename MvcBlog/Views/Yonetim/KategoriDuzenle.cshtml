@@ -1,0 +1,34 @@
+﻿@model MvcBlog.Models.Kategori
+
+@{
+    ViewBag.Title = "Kategori Duzenle";
+}
+
+<h2>KategoriDuzenle</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Kategori</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Adi)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Adi)
+            @Html.ValidationMessageFor(model => model.Adi)
+        </div>
+
+        <p>
+            <input type="submit" value="Kaydet" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Listeye Dön", "Kategori")
+</div>

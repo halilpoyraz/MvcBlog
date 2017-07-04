@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "Detay";
+}
+
+@model MvcBlog.Models.Makale
+
+@helper SureYaz(DateTime tarih)
+{
+    TimeSpan sure = DateTime.Now - tarih;
+    if (sure.TotalMilliseconds < 0)
+    {
+        <div class="time-ago"></div>
+    }
+    else if ((DateTime.Now - tarih).TotalMinutes < 1)
+    {
+        <div class="time-ago">Şimdi</div>
+    }
+    else if (sure.TotalHours < 1)
+    {
+        <div class="time-ago">@sure.Minutes Dakika Önce</div>
+    }
+    else if (sure.TotalDays < 1)
+    {
+        <div class="time-ago">@sure.Hours Saat Önce</div>
+    }
+    else
+    {
+        <div class="time-ago">@tarih.ToString("dd.MM.yyyy") tarihinde</div>
+    }
+
+}
+
+<script>
+    setTimeout(function () { Goruntulendi(@Model.Id); }, 15000);
+</script>
+
+
+
+<article class="blog-post">
+    <header>
+        <h2>
+            <a href="/Makale/Detay/@Model.Id">@Model.Baslik</a>
+        </h2>
+        <ul class="info">
+            <li><a href="/Makale/Index/@Model.KategriID">{ @Model.Kategori.Adi }</a></li>
+            <li><a href="/Makale/TariheGoreListe? yil=@Model.YayimTarihi.Year &ay=@Model.YayimTarihi.Month">{ @Model.YayimTarihi.ToString("MMMM yyyy") }</a></li>
+            <li><a href="/Yazar/Index/@Model.YazarID">{ @Model.Kullanici.Adi @Model.Kullanici.Soyadi }</a></li>
+            <li>{ Yorumlar: <a href="#Yorum">@Model.Yorums.Count</a> }</li>
+            <li><a href="#">{ Görüntüleme: @Model.Goruntulenme}</a></li>
+            <li>{<a href="javascript:void(0)"  class="begen" data-Id="@Model.Id"> Beğeni (@Model.Begeni) </a>}</li>
+        </ul>
+    </header>
+    <div class="makale">
+    
+            @Model.Icerik
+        
+        <div class="author-wrap">
+            <div class="author">
+                <figure>
+                    <a href="/Yazar/Index/@Model.YazarID">
+                        <img src="@Model.Kullanici.Resim.KucukResimYol" alt="#" />
+                    </a>
+                </figure>
+                <div class="name">@Model.Kullanici.Adi @Model.Kullanici.Soyadi</div>
+            </div>
+        </div>
+    </div>
+</article>
+
+@*<a id="Yorum" />*@
+<div class="comments">
+    <h3>
+        @Model.Yorums.Count Yorum
+    </h3>
+    <ul>
+        @foreach (var yorum in Model.Yorums)
+        {
+
+
+            <li class="comment">
+                <div class="user">
+                    <figure>
+                        <a href="#">
+                            <img src="@yorum.Kullanici.Resim.KucukResimYol" alt="" />
+                        </a>
+                    </figure>
+                    <div class="name text-center">
+                        <a href="#">@yorum.Kullanici.Adi @yorum.Kullanici.Soyadi</a>
+                    </div>
+                </div>
+                <div class="comment-box">
+                    <div class="info">
+                        @SureYaz(yorum.EklenmeTarihi)
+                    </div>
+                    <div class="text">
+                        @yorum.Icerik
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+@{ MvcBlog.Models.Kullanici k = new MvcBlog.Models.Kullanici();}
+@if(ViewBag.Kullanici!=null)
+{
+    
+<div class="write-comment">
+    <h3>Yorum Yaz</h3>
+    <div class="user">
+        <figure>
+            <a href="#">
+                <img src="@ViewBag.Kullanici.Resim.KucukResimYol" alt="" />
+            </a>
+        </figure>
+        <div class="name text-center">
+            <a href="#">@ViewBag.Kullanici.Adi @ViewBag.Kullanici.Soyadi</a>
+        </div>
+    </div>
+    <div class="textarea-wrap">
+        <form action="/Makale/YorumYaz" method="post">
+            <input type="hidden" name="YazarID" value="@ViewBag.Kullanici.Id" />
+            <input type="hidden" name="MakaleID" value="@Model.Id" />
+            <textarea name="Icerik" placeholder="write someting smart"></textarea>
+            <button type="submit" class="send">Gönder</button>
+        </form>
+    </div>
+    <hr>
+</div>
+}
